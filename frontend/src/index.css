@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Mystic Night Palette */
+    --midnight: 222 47% 11%;
+    --cosmic: 276 91% 21%;
+    --cosmic-light: 276 80% 35%;
+    --stardust: 45 93% 54%;
+    --nebula: 215 28% 91%;
+    --nebula-dark: 215 20% 65%;
+
+    --background: 222 47% 11%;
+    --foreground: 215 28% 91%;
+
+    --card: 222 47% 14%;
+    --card-foreground: 215 28% 91%;
+
+    --popover: 222 47% 12%;
+    --popover-foreground: 215 28% 91%;
+
+    --primary: 45 93% 54%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 276 91% 21%;
+    --secondary-foreground: 215 28% 91%;
+
+    --muted: 222 30% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 276 80% 35%;
+    --accent-foreground: 215 28% 91%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 215 28% 91%;
+
+    --border: 276 40% 25%;
+    --input: 222 30% 20%;
+    --ring: 45 93% 54%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(var(--midnight)) 0%, hsl(var(--cosmic)) 50%, hsl(var(--midnight)) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(276 91% 21% / 0.6) 0%, hsl(222 47% 11% / 0.8) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 93% 54%) 0%, hsl(35 90% 60%) 100%);
+    --gradient-button: linear-gradient(135deg, hsl(45 93% 54%) 0%, hsl(40 95% 45%) 100%);
+
+    /* Shadows */
+    --shadow-cosmic: 0 0 60px hsl(276 91% 21% / 0.5);
+    --shadow-gold: 0 0 30px hsl(45 93% 54% / 0.3);
+    --shadow-card: 0 8px 32px hsl(222 47% 5% / 0.5);
+
+    /* Glow Effects */
+    --glow-gold: 0 0 20px hsl(45 93% 54% / 0.5), 0 0 40px hsl(45 93% 54% / 0.3);
+    --glow-purple: 0 0 20px hsl(276 91% 21% / 0.5), 0 0 40px hsl(276 80% 35% / 0.3);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 215 28% 91%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, hsl(var(--midnight)) 0%, hsl(var(--cosmic)) 50%, hsl(var(--midnight)) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Cinzel', serif;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(45 93% 54%) 0%, hsl(35 90% 65%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-cosmic-gradient {
+    background: var(--gradient-cosmic);
+  }
+
+  .bg-card-gradient {
+    background: var(--gradient-card);
+  }
+
+  .shadow-cosmic {
+    box-shadow: var(--shadow-cosmic);
+  }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .glow-gold {
+    box-shadow: var(--glow-gold);
+  }
+
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+}
+
+/* Star Animation */
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsl(45 93% 54% / 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px hsl(45 93% 54% / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shooting-star {
+  0% {
+    transform: rotate(45deg) translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(45deg) translateX(300px);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.animate-shooting-star {
+  animation: shooting-star 3s ease-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, hsl(45 93% 54% / 0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-orbit {
+  animation: orbit 15s linear infinite;
+}
+
+/* Zodiac Card Hover */
+.zodiac-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zodiac-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-cosmic), var(--glow-purple);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--midnight));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--cosmic));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--cosmic-light));
+}
