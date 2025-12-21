@@ -39,3 +39,14 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# .NET / Backend
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.pdb
+*.cache
+*.dll
+*.exe
+appsettings.Development.json

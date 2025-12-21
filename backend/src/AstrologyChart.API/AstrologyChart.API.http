@@ -1,0 +1,6 @@
+@AstrologyChart.API_HostAddress = http://localhost:5243
+
+GET {{AstrologyChart.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
