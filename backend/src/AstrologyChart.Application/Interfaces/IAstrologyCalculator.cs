@@ -4,5 +4,5 @@ namespace AstrologyChart.Application.Interfaces;
 
 public interface IAstrologyCalculator
 {
-    List<PlanetPosition> CalculatePlanets(DateTime utcDate, double latitude, double longitude);
+    ChartCalculationResult Calculate(DateTime utcDate, double latitude, double longitude);
 }
