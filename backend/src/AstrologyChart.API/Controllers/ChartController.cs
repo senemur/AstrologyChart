@@ -36,7 +36,7 @@ public class ChartController : ControllerBase
     public async Task<IActionResult> SaveChart([FromBody] SaveChartRequest request)
     {
         var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (string.IsNullOrEmpty(userIdString) || !Guid.TryParse(userIdString, out var userId))
+        if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out var userId))
             return Unauthorized();
 
         // 1. Calculate result (Planets + Houses + Axes)
@@ -66,7 +66,7 @@ public class ChartController : ControllerBase
     public async Task<ActionResult<List<Chart>>> GetMyCharts()
     {
         var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userIdString) || !Guid.TryParse(userIdString, out var userId))
+                if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out var userId))
             return Unauthorized();
 
         var charts = await _context.Charts
