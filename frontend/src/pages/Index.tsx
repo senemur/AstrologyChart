@@ -7,10 +7,8 @@ import { CosmicLoader } from "@/components/CosmicLoader";
 import { DailyHoroscope } from "@/components/DailyHoroscope";
 import {
   zodiacSigns,
-  calculateSunSign,
-  calculateMoonSign
 } from "@/lib/zodiac";
-import { calculateAscendantDegree, getZodiacSign } from "@/lib/astronomy";
+import { calculateChart } from "@/lib/api";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
@@ -27,22 +25,30 @@ const Index = () => {
   const handleCalculate = async (data: { day: number; month: number; year: number; hour: number }) => {
     setIsLoading(true);
 
-    // Simulate calculation time
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Create date object (assuming local time input, converting to UTC for backend)
+      const birthDate = new Date(data.year, data.month - 1, data.day, data.hour, 0);
 
-    // Calculate Signs
-    const sunSign = calculateSunSign(data.day, data.month);
-    const moonSign = calculateMoonSign(data.day, data.month, data.year);
+      // Call Backend API
+      // Defaulting to Istanbul (41.0082, 28.9784) as per previous logic
+      const apiResult = await calculateChart(birthDate);
 
-    // Improved Rising Sign Calculation
-    // Note: This relies on default Lat/Lon (Istanbul) since we don't capture location yet.
-    // In a production app, we would ask for location.
-    const birthDate = new Date(data.year, data.month - 1, data.day, data.hour, 0);
-    const ascDegree = calculateAscendantDegree(birthDate);
-    const risingSign = getZodiacSign(ascDegree);
+      // Map Backend Result to Frontend UI
+      const sun = apiResult.planets.find(p => p.planetName === "Sun");
+      const moon = apiResult.planets.find(p => p.planetName === "Moon");
+      const rising = apiResult.axes.ascendantSign;
 
-    setResult({ sunSign, moonSign, risingSign });
-    setIsLoading(false);
+      setResult({
+        sunSign: sun?.sign.toLowerCase() || "aries",
+        moonSign: moon?.sign.toLowerCase() || "aries",
+        risingSign: rising.toLowerCase()
+      });
+    } catch (error) {
+      console.error("Calculation failed:", error);
+      // Fallback or error handling could go here
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleReset = () => {
