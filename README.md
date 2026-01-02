@@ -2,7 +2,12 @@
 
 Mistik Astroloji, kullanıcıların burçlarını keşfetmelerine, doğum haritalarını hesaplamalarına ve kozmik rehberlik almalarına olanak tanıyan modern ve etkileyici bir web uygulamasıdır.
 
-![Proje Ekran Görüntüsü](https://i.ibb.co/example-image.jpg) *Görsel temsilidir.*
+![1slider](https://github.com/user-attachments/assets/98a8882a-994d-4529-9882-a9c76e22a61b)
+![4burclar](https://github.com/user-attachments/assets/4fe145b2-acfe-4393-95a6-feb95ad096e5)
+![5burcdetay](https://github.com/user-attachments/assets/97704758-7673-43fa-b978-9130d43e390e)
+
+
+
 
 ## ✨ Özellikler
 
