@@ -1,16 +1,21 @@
 import { ZodiacCard } from "./ZodiacCard";
 import { ZodiacSign } from "@/lib/zodiac";
-import { Sparkles, RotateCcw, Star, Moon, Sun, ArrowUp, Quote } from "lucide-react";
+import { Sparkles, RotateCcw, Star, Moon, Sun, ArrowUp, Quote, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChartCalculationResult } from "@/lib/api";
+import { useState } from "react";
 
 interface ZodiacResultsProps {
   sunSign: ZodiacSign;
   moonSign: ZodiacSign;
   risingSign: ZodiacSign;
+  fullChart: ChartCalculationResult;
   onReset: () => void;
 }
 
-export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: ZodiacResultsProps) => {
+export const ZodiacResults = ({ sunSign, moonSign, risingSign, fullChart, onReset }: ZodiacResultsProps) => {
+  const [showDetails, setShowDetails] = useState(false);
+
   return (
     <div className="w-full max-w-6xl mx-auto space-y-12 px-4">
       {/* Header */}
@@ -32,7 +37,7 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
       <div className="relative">
         {/* Connection lines */}
         <div className="hidden md:block absolute top-1/2 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-stardust/30 to-transparent" />
-        
+
         <div className="flex flex-wrap justify-center gap-12 md:gap-16 mb-16">
           {/* Sun */}
           <div className="text-center animate-scale-in group" style={{ animationDelay: '0.1s' }}>
@@ -49,7 +54,7 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
             <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">Güneş Burcu</p>
             <p className="font-display text-xl text-nebula">{sunSign.name}</p>
           </div>
-          
+
           {/* Moon */}
           <div className="text-center animate-scale-in group" style={{ animationDelay: '0.2s' }}>
             <div className="relative mb-4">
@@ -64,7 +69,7 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
             <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">Ay Burcu</p>
             <p className="font-display text-xl text-nebula">{moonSign.name}</p>
           </div>
-          
+
           {/* Rising */}
           <div className="text-center animate-scale-in group" style={{ animationDelay: '0.3s' }}>
             <div className="relative mb-4">
@@ -108,20 +113,20 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
               <p className="text-muted-foreground text-sm">Yıldızların size özel mesajı</p>
             </div>
           </div>
-          
+
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              <span className="text-stardust font-semibold">{sunSign.name}</span> güneş burcu olarak, yaşam amacınız ve çekirdek kişiliğiniz {sunSign.element} elementinin enerjisini taşır. 
+              <span className="text-stardust font-semibold">{sunSign.name}</span> güneş burcu olarak, yaşam amacınız ve çekirdek kişiliğiniz {sunSign.element} elementinin enerjisini taşır.
               {sunSign.rulingPlanet} gezegeninin yönetiminde, {sunSign.traits[0].toLowerCase()} ve {sunSign.traits[1].toLowerCase()} özellikleriniz ön plana çıkar.
             </p>
-            
+
             <p>
-              <span className="text-nebula font-semibold">{moonSign.name}</span> Ay burcu, duygusal iç dünyanızı ve bilinçaltı tepkilerinizi şekillendirir. 
+              <span className="text-nebula font-semibold">{moonSign.name}</span> Ay burcu, duygusal iç dünyanızı ve bilinçaltı tepkilerinizi şekillendirir.
               Duygusal güvenlik için {moonSign.element === "Su" ? "derin bağlar" : moonSign.element === "Toprak" ? "istikrar" : moonSign.element === "Ateş" ? "özgürlük" : "entelektüel uyum"} ararsınız.
             </p>
-            
+
             <p>
-              <span className="text-cosmic-light font-semibold">{risingSign.name}</span> yükselenle, dünyaya kendinizi {risingSign.traits[0].toLowerCase()} ve {risingSign.traits[2].toLowerCase()} bir şekilde sunarsınız. 
+              <span className="text-cosmic-light font-semibold">{risingSign.name}</span> yükselenle, dünyaya kendinizi {risingSign.traits[0].toLowerCase()} ve {risingSign.traits[2].toLowerCase()} bir şekilde sunarsınız.
               İlk izleniminiz {risingSign.element} elementinin karakteristik özelliklerini yansıtır.
             </p>
           </div>
@@ -131,14 +136,13 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
             <p className="text-sm text-muted-foreground mb-4">Element Dağılımınız:</p>
             <div className="flex flex-wrap gap-3">
               {[sunSign, moonSign, risingSign].map((sign, i) => (
-                <span 
+                <span
                   key={i}
-                  className={`px-4 py-2 rounded-full text-sm font-medium ${
-                    sign.element === "Ateş" ? "bg-orange-500/20 text-orange-400 border border-orange-500/30" :
-                    sign.element === "Toprak" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" :
-                    sign.element === "Hava" ? "bg-sky-500/20 text-sky-400 border border-sky-500/30" :
-                    "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium ${sign.element === "Ateş" ? "bg-orange-500/20 text-orange-400 border border-orange-500/30" :
+                      sign.element === "Toprak" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" :
+                        sign.element === "Hava" ? "bg-sky-500/20 text-sky-400 border border-sky-500/30" :
+                          "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                    }`}
                 >
                   {sign.element} ({i === 0 ? "Güneş" : i === 1 ? "Ay" : "Yükselen"})
                 </span>
@@ -147,6 +151,77 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
           </div>
         </div>
       </div>
+
+      {/* Detailed Chart Toggle */}
+      <div className="text-center pt-8">
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => setShowDetails(!showDetails)}
+          className="group border-stardust/30 text-stardust hover:bg-stardust/10"
+        >
+          <List className="w-5 h-5 mr-2" />
+          {showDetails ? "Detayları Gizle" : "Detaylı Doğum Haritası"}
+        </Button>
+      </div>
+
+      {/* Detailed Chart View */}
+      {showDetails && (
+        <div className="animate-fade-in space-y-8 bg-card/40 p-8 rounded-3xl border border-white/5 backdrop-blur-sm">
+          <h3 className="text-2xl font-display text-white text-center mb-6">Gezegen Konumları ve Evler</h3>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Planets Table */}
+            <div>
+              <h4 className="text-lg font-semibold text-stardust mb-4 border-b border-white/10 pb-2">Gezegenler</h4>
+              <div className="space-y-3">
+                {fullChart.planets.map((planet, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+                    <span className="text-white font-medium">{planet.planetName}</span>
+                    <div className="text-right">
+                      <span className="text-nebula block">{planet.sign}</span>
+                      <span className="text-xs text-muted-foreground">{planet.longitude.toFixed(2)}°</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Houses Table */}
+            <div>
+              <h4 className="text-lg font-semibold text-cosmic-light mb-4 border-b border-white/10 pb-2">Evler</h4>
+              <div className="space-y-3">
+                {fullChart.houses.map((house, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+                    <span className="text-white font-medium">{house.houseNumber}. Ev</span>
+                    <div className="text-right">
+                      <span className="text-nebula block">{house.sign}</span>
+                      <span className="text-xs text-muted-foreground">{house.degree.toFixed(2)}°</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Axes */}
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <h4 className="text-lg font-semibold text-white mb-4 text-center">Önemli Noktalar</h4>
+            <div className="flex justify-center gap-8">
+              <div className="text-center p-4 rounded-xl bg-white/5 min-w-[120px]">
+                <div className="text-sm text-muted-foreground mb-1">Yükselen (ASC)</div>
+                <div className="text-xl text-stardust font-display">{fullChart.axes.ascendantSign}</div>
+                <div className="text-xs text-white/50">{fullChart.axes.ascendant.toFixed(2)}°</div>
+              </div>
+              <div className="text-center p-4 rounded-xl bg-white/5 min-w-[120px]">
+                <div className="text-sm text-muted-foreground mb-1">Tepe Noktası (MC)</div>
+                <div className="text-xl text-cosmic-light font-display">{fullChart.axes.mcSign}</div>
+                <div className="text-xs text-white/50">{fullChart.axes.mc.toFixed(2)}°</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Fun Facts Section */}
       <div className="grid md:grid-cols-2 gap-6 mt-12">
@@ -157,12 +232,12 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
           </div>
           <p className="text-sm text-muted-foreground">
             {sunSign.element === "Ateş" ? "Aslan, Yay ve Koç burçlarıyla yüksek enerji uyumu" :
-             sunSign.element === "Toprak" ? "Başak, Oğlak ve Boğa burçlarıyla pratik uyum" :
-             sunSign.element === "Hava" ? "Terazi, Kova ve İkizler burçlarıyla entelektüel uyum" :
-             "Akrep, Balık ve Yengeç burçlarıyla duygusal uyum"} yaşarsınız.
+              sunSign.element === "Toprak" ? "Başak, Oğlak ve Boğa burçlarıyla pratik uyum" :
+                sunSign.element === "Hava" ? "Terazi, Kova ve İkizler burçlarıyla entelektüel uyum" :
+                  "Akrep, Balık ve Yengeç burçlarıyla duygusal uyum"} yaşarsınız.
           </p>
         </div>
-        
+
         <div className="bg-card/60 border border-border/50 rounded-2xl p-6 backdrop-blur animate-fade-in" style={{ animationDelay: '1.1s' }}>
           <div className="flex items-center gap-3 mb-4">
             <Sparkles className="w-5 h-5 text-cosmic-light" />
@@ -170,12 +245,12 @@ export const ZodiacResults = ({ sunSign, moonSign, risingSign, onReset }: Zodiac
           </div>
           <p className="text-sm text-muted-foreground">
             {sunSign.rulingPlanet === "Mars" ? "Salı" :
-             sunSign.rulingPlanet === "Venüs" ? "Cuma" :
-             sunSign.rulingPlanet === "Merkür" ? "Çarşamba" :
-             sunSign.rulingPlanet === "Ay" ? "Pazartesi" :
-             sunSign.rulingPlanet === "Güneş" ? "Pazar" :
-             sunSign.rulingPlanet === "Jüpiter" ? "Perşembe" :
-             "Cumartesi"} günü {sunSign.rulingPlanet} enerjisiyle en güçlü olduğunuz gündür.
+              sunSign.rulingPlanet === "Venüs" ? "Cuma" :
+                sunSign.rulingPlanet === "Merkür" ? "Çarşamba" :
+                  sunSign.rulingPlanet === "Ay" ? "Pazartesi" :
+                    sunSign.rulingPlanet === "Güneş" ? "Pazar" :
+                      sunSign.rulingPlanet === "Jüpiter" ? "Perşembe" :
+                        "Cumartesi"} günü {sunSign.rulingPlanet} enerjisiyle en güçlü olduğunuz gündür.
           </p>
         </div>
       </div>

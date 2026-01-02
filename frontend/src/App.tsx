@@ -10,6 +10,7 @@ import "./index.css";
 
 import ZodiacGallery from "./pages/ZodiacGallery";
 import ZodiacDetail from "./pages/ZodiacDetail";
+import Results from "./pages/Results";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/burclar" element={<ZodiacGallery />} />
           <Route path="/burc/:sign" element={<ZodiacDetail />} />
+          <Route path="/sonuclar" element={<Results />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
