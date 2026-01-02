@@ -60,7 +60,7 @@ export const Footer = () => {
                         <ul className="space-y-3 text-sm text-white/50">
                             <li className="flex items-center gap-2">
                                 <Mail className="w-4 h-4" />
-                                info@astrolojidunyasi.com
+                                senemurkmez163@gmail.com
                             </li>
                         </ul>
                         <div className="mt-6 pt-6 border-t border-white/5">

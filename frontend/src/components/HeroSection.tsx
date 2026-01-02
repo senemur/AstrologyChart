@@ -51,36 +51,53 @@ export const HeroSection = () => {
 
         {/* Right Graphic - Zodiac Wheel */}
         <div className="relative flex justify-center items-center lg:justify-end perspective-1000">
-          <div className="relative w-[400px] h-[400px] md:w-[600px] md:h-[600px] group">
+          <div className="relative w-[400px] h-[400px] md:w-[600px] md:h-[600px] flex items-center justify-center">
 
-            {/* Outer Glow Ring */}
-            <div className="absolute inset-0 rounded-full border border-stardust/20 shadow-[0_0_50px_rgba(255,165,0,0.1)] animate-[spin_60s_linear_infinite]" />
-            <div className="absolute inset-[15%] rounded-full border border-white/5 animate-[spin_40s_linear_infinite_reverse]" />
+            {/* Orbit Tracks */}
+            <div className="absolute inset-0 rounded-full border border-stardust/10 animate-[spin_60s_linear_infinite]" />
+            <div className="absolute inset-[15%] rounded-full border border-stardust/5 animate-[spin_40s_linear_infinite_reverse]" />
+            <div className="absolute inset-[30%] rounded-full border border-stardust/5 animate-[spin_30s_linear_infinite]" />
 
-            {/* Central Sun/Star */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center animate-pulse-slow">
-              <div className="w-4 h-4 rounded-full bg-stardust shadow-[0_0_20px_rgba(255,215,0,0.8)] mb-2" />
-              <span className="text-white/50 text-sm tracking-widest uppercase">Bir burç seçin</span>
+            {/* Central Sun */}
+            <div className="absolute z-10 flex flex-col items-center justify-center">
+              <div className="relative">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-amber-300 via-orange-400 to-red-500 shadow-[0_0_60px_rgba(255,165,0,0.6)] flex items-center justify-center">
+
+                </div>
+                {/* Sun Rays/Glow */}
+                <div className="absolute inset-0 rounded-full bg-orange-400/30 blur-xl animate-pulse" />
+              </div>
             </div>
 
-            {/* Orbiting Zodiac Icons */}
-            {zodiacSymbols.map((symbol, i) => {
-              const angle = (i * 360) / 12;
-              const radius = 45; // percentage
-              return (
-                <div
-                  key={i}
-                  className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6 flex items-center justify-center rounded-xl bg-[#1a1a2e]/80 border border-white/10 text-white/70 text-xl hover:text-stardust hover:border-stardust/50 hover:bg-[#1a1a2e] hover:scale-125 transition-all duration-300 cursor-pointer shadow-lg"
-                  style={{
-                    transform: `rotate(${angle}deg) translate(250px) rotate(-${angle}deg)`, // Fixed radius in pixels somewhat dynamic
-                  }}
-                >
-                  <Link to={`/burc/${zodiacKeys[i]}`} className="w-full h-full flex items-center justify-center">
-                    {symbol}
-                  </Link>
-                </div>
-              );
-            })}
+            {/* Orbiting Zodiac Container */}
+            <div className="absolute inset-0 animate-[spin_60s_linear_infinite]">
+              {zodiacSymbols.map((symbol, i) => {
+                const angle = (i * 360) / 12;
+                // Position items on the circle edge
+                // 50% is center, we want to push them out to the edge (approx 45% radius)
+                const radius = 42;
+                const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
+                const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
+
+                return (
+                  <div
+                    key={i}
+                    className="absolute w-14 h-14 -ml-7 -mt-7 flex items-center justify-center rounded-full bg-[#1a1a2e]/90 border border-white/10 text-white/80 text-2xl hover:text-stardust hover:border-stardust/50 hover:bg-[#1a1a2e] hover:scale-125 transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-sm group"
+                    style={{
+                      left: `${x}%`,
+                      top: `${y}%`,
+                    }}
+                  >
+                    {/* Counter-rotate to keep icon upright */}
+                    <div className="animate-[spin_60s_linear_infinite_reverse] w-full h-full flex items-center justify-center">
+                      <Link to={`/burc/${zodiacKeys[i]}`} className="w-full h-full flex items-center justify-center">
+                        {symbol}
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

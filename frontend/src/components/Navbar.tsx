@@ -10,8 +10,8 @@ export const Navbar = () => {
         { label: "Ana Sayfa", path: "/" },
         { label: "Burçlar", path: "/burclar" },
         { label: "Burç Hesapla", path: "/#birth-chart" }, // Hash link handling needed
-        { label: "Yükselen Burç", path: "/yukselen-burc" },
-        { label: "Ay Burcu", path: "/ay-burcu" },
+        { label: "Giriş Yap", path: "/login" },
+
     ];
 
     return (
