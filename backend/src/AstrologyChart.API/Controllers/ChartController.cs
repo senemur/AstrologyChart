@@ -50,7 +50,7 @@ public class ChartController : ControllerBase
             BirthDate = request.Date.ToUniversalTime(),
             Latitude = request.Latitude,
             Longitude = request.Longitude,
-            PlanetPositionsJson = JsonSerializer.Serialize(result), // Storing full result
+            PlanetPositionsJson = JsonSerializer.Serialize(result, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }), // Storing full result
             CreatedAt = DateTime.UtcNow
         };
 

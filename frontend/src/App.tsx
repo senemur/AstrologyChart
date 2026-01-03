@@ -13,6 +13,7 @@ import ZodiacDetail from "./pages/ZodiacDetail";
 import Results from "./pages/Results";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import MyCharts from "./pages/MyCharts";
 import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/sonuclar" element={<Results />} />
             <Route path="/giris" element={<Login />} />
             <Route path="/kayit" element={<Register />} />
+            <Route path="/haritalarim" element={<MyCharts />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

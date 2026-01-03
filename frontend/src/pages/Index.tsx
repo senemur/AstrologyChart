@@ -32,6 +32,11 @@ const Index = () => {
             moonSign: moon?.sign.toLowerCase() || "aries",
             risingSign: rising.toLowerCase(),
             fullChart: apiResult
+          },
+          requestData: {
+            date: birthDate.toISOString(),
+            latitude: 41.0082, // Hardcoded for now, should match calculation default
+            longitude: 28.9784
           }
         }
       });

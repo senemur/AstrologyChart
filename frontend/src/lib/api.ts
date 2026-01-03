@@ -89,6 +89,13 @@ export const login = async (data: LoginRequest): Promise<AuthResponse> => {
     return response.json();
 };
 
+export interface SaveChartRequest {
+    name: string;
+    date: string;
+    latitude: number;
+    longitude: number;
+}
+
 export const register = async (data: RegisterRequest): Promise<void> => {
     const response = await fetch(`${API_BASE_URL}/Auth/register`, {
         method: "POST",
@@ -102,4 +109,46 @@ export const register = async (data: RegisterRequest): Promise<void> => {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || "Kayıt olunamadı");
     }
+};
+
+export const saveChart = async (data: SaveChartRequest): Promise<void> => {
+    const response = await fetch(`${API_BASE_URL}/Chart/save`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            ...(localStorage.getItem("token") ? { "Authorization": `Bearer ${localStorage.getItem("token")}` } : {})
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        throw new Error("Harita kaydedilemedi");
+    }
+};
+
+export interface Chart {
+    id: number;
+    userId: number;
+    name: string;
+    birthDate: string;
+    latitude: number;
+    longitude: number;
+    planetPositionsJson: string;
+    createdAt: string;
+}
+
+export const getMyCharts = async (): Promise<Chart[]> => {
+    const response = await fetch(`${API_BASE_URL}/Chart/my-charts`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            ...(localStorage.getItem("token") ? { "Authorization": `Bearer ${localStorage.getItem("token")}` } : {})
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error("Haritalar getirilemedi");
+    }
+
+    return response.json();
 };

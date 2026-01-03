@@ -57,7 +57,10 @@ export const Navbar = () => {
                 <div className="flex items-center gap-4">
                     {isAuthenticated ? (
                         <div className="flex items-center gap-4">
-                            <span className="text-sm text-white/80 hidden lg:inline">Merhaba, {user?.username}</span>
+                            <Link to="/haritalarim" className="hidden lg:flex items-center gap-2 text-sm text-white/80 hover:text-stardust transition-colors">
+                                <User className="w-4 h-4" />
+                                <span>Haritalarım ({user?.username})</span>
+                            </Link>
                             <Button variant="ghost" size="icon" onClick={logout} className="text-white hover:text-red-400 hover:bg-white/5" title="Çıkış Yap">
                                 <LogOut className="w-5 h-5" />
                             </Button>
