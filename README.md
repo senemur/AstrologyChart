@@ -27,15 +27,14 @@ Mistik Astroloji, kullanıcıların doğum haritalarını hesaplamalarına, sakl
 
 ## 📸 Ekran Görüntüleri (Screenshots)
 
-| Giriş Ekranı (Login) | Hesaplama Sonuçları |
-| -------------------- | ------------------- |
-| ![Login Page Placeholder](screenshot-login.png) | ![Results Page Placeholder](screenshot-results.png) |
+| Giriş Ekranı (Login) | Hesaplama Alanı | Hesaplama Sonuçları |
+| -------------------- | ------------------- | ------------------- |
+| ![girisyap](https://github.com/user-attachments/assets/f0c2caa4-0412-4c43-9821-254619e7f03a) | ![2hero](https://github.com/user-attachments/assets/77ce7497-d01c-4e05-8dd9-b0521c122741) |![6dogumharitasi](https://github.com/user-attachments/assets/17b085cf-e672-411c-b803-473e492ea0e7)|
 
-| Haritalarım (My Charts) | Kayıt Ekranı (Register) |
-| ----------------------- | ----------------------- |
-| ![My Charts Placeholder](screenshot-mycharts.png) | ![Register Placeholder](screenshot-register.png) |
+| Haritalarım (My Charts) | Burçlar | Burç Detayı |
+| ----------------------- | ----------------------- |----------------------- |
+|![haritalarım](https://github.com/user-attachments/assets/961e0017-5710-46a0-96a6-667dd5108a15)| ![4burclar](https://github.com/user-attachments/assets/9c2441d7-e48e-4d8e-8405-85e6d3e921a1)|![5burcdetay](https://github.com/user-attachments/assets/22d312a4-e04c-4e45-b0d5-069a87636959)|
 
-*(Not: Ekran görüntüleri geliştirme aşamasındadır, lütfen kendi görsellerinizle güncelleyin.)*
 
 ---
 
@@ -118,6 +117,3 @@ Projeyi yerel ortamınızda çalıştırmak için hem Backend hem de Frontend'i 
 4.  Dalınıza push yapın (`git push origin feature/yeni-ozellik`).
 5.  Bir Pull Request (PR) oluşturun.
 
-## 📄 Lisans
-
-Bu proje MIT Lisansı ile lisanslanmıştır.
