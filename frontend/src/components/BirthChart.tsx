@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, Sparkles, Star } from "lucide-react";
+import { Calendar, Clock, Sparkles, Star, Lock } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface BirthChartProps {
   onCalculate: (data: { day: number; month: number; year: number; hour: number }) => void;
@@ -12,15 +15,28 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [hour, setHour] = useState("");
+  const { isAuthenticated } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    if (!isAuthenticated) {
+      toast({
+        title: "Giriş Yapmalısınız",
+        description: "Harita hesaplamak için lütfen önce giriş yapın.",
+        variant: "destructive",
+      });
+      navigate("/giris");
+      return;
+    }
+
     const dayNum = parseInt(day);
     const monthNum = parseInt(month);
     const yearNum = parseInt(year);
     const hourNum = parseInt(hour) || 12;
-    
+
     if (dayNum && monthNum && yearNum) {
       onCalculate({
         day: dayNum,
@@ -36,14 +52,14 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
       <div className="relative">
         {/* Outer glow */}
         <div className="absolute -inset-1 bg-gradient-to-r from-stardust/30 via-cosmic-light/30 to-stardust/30 rounded-3xl blur-lg opacity-60 animate-pulse-slow" />
-        
+
         {/* Decorative corner elements */}
         <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-stardust/50 rounded-tl-lg" />
         <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-stardust/50 rounded-tr-lg" />
         <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-stardust/50 rounded-bl-lg" />
         <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-stardust/50 rounded-br-lg" />
-        
-        <form 
+
+        <form
           onSubmit={handleSubmit}
           className="relative bg-card/90 backdrop-blur-xl border border-cosmic-light/30 rounded-2xl p-8 md:p-10 space-y-8"
         >
@@ -77,6 +93,7 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
                   onChange={(e) => setDay(e.target.value)}
                   required
                   className="w-full bg-muted/50 border border-border/50 rounded-xl px-4 py-4 text-foreground text-center text-lg font-medium placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-stardust/50 focus:border-stardust transition-all hover:border-cosmic-light/50"
+                  disabled={!isAuthenticated}
                 />
               </div>
               <div className="group">
@@ -90,6 +107,7 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
                   onChange={(e) => setMonth(e.target.value)}
                   required
                   className="w-full bg-muted/50 border border-border/50 rounded-xl px-4 py-4 text-foreground text-center text-lg font-medium placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-stardust/50 focus:border-stardust transition-all hover:border-cosmic-light/50"
+                  disabled={!isAuthenticated}
                 />
               </div>
               <div className="group">
@@ -103,6 +121,7 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
                   onChange={(e) => setYear(e.target.value)}
                   required
                   className="w-full bg-muted/50 border border-border/50 rounded-xl px-4 py-4 text-foreground text-center text-lg font-medium placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-stardust/50 focus:border-stardust transition-all hover:border-cosmic-light/50"
+                  disabled={!isAuthenticated}
                 />
               </div>
             </div>
@@ -124,6 +143,7 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
                 value={hour}
                 onChange={(e) => setHour(e.target.value)}
                 className="w-full bg-muted/50 border border-border/50 rounded-xl px-4 py-4 text-foreground text-center text-lg font-medium placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-stardust/50 focus:border-stardust transition-all hover:border-cosmic-light/50"
+                disabled={!isAuthenticated}
               />
             </div>
             <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-2">
@@ -132,17 +152,21 @@ export const BirthChart = ({ onCalculate, isLoading }: BirthChartProps) => {
             </p>
           </div>
 
-          <Button 
-            type="submit" 
-            variant="cosmic" 
+          <Button
+            type="submit"
+            variant={isAuthenticated ? "cosmic" : "secondary"}
             size="xl"
-            className="w-full mt-8 group"
-            disabled={isLoading || !day || !month || !year}
+            className={`w-full mt-8 group transition-all duration-300 ${!isAuthenticated ? 'opacity-90 hover:opacity-100 bg-gray-800 hover:bg-gray-700 text-gray-300' : ''}`}
+            disabled={isLoading}
           >
             {isLoading ? (
               <span className="flex items-center gap-3">
                 <div className="w-6 h-6 border-2 border-midnight/30 border-t-midnight rounded-full animate-spin" />
                 Hesaplanıyor...
+              </span>
+            ) : !isAuthenticated ? (
+              <span className="flex items-center gap-2 text-lg">
+                <Lock className="w-5 h-5" /> Giriş Yapın
               </span>
             ) : (
               <span className="flex items-center gap-3">

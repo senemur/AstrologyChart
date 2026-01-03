@@ -49,7 +49,7 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials.");
 
         var token = GenerateJwtToken(user);
-        return Ok(new { Token = token });
+        return Ok(new { Token = token, UserId = user.Id, Username = user.Username });
     }
 
     private string GenerateJwtToken(User user)
