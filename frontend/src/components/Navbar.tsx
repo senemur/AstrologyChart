@@ -1,21 +1,22 @@
-import { Star } from "lucide-react";
+import { Star, LogOut, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
     const location = useLocation();
     const isHome = location.pathname === "/";
+    const { isAuthenticated, user, logout } = useAuth();
 
     const navItems = [
         { label: "Ana Sayfa", path: "/" },
         { label: "Burçlar", path: "/burclar" },
-        { label: "Burç Hesapla", path: "/#birth-chart" }, // Hash link handling needed
-        { label: "Giriş Yap", path: "/login" },
-
+        { label: "Burç Hesapla", path: "/#birth-chart" },
     ];
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 transition-all duration-300 bg-background/0 backdrop-blur-sm">
+        <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 transition-all duration-300 bg-background/80 backdrop-blur-md border-b border-white/5">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-3 group">
@@ -53,10 +54,25 @@ export const Navbar = () => {
                     })}
                 </nav>
 
-                {/* Mobile Menu Button (Placeholder) */}
-                <button className="md:hidden p-2 text-white/70">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
-                </button>
+                <div className="flex items-center gap-4">
+                    {isAuthenticated ? (
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm text-white/80 hidden lg:inline">Merhaba, {user?.username}</span>
+                            <Button variant="ghost" size="icon" onClick={logout} className="text-white hover:text-red-400 hover:bg-white/5" title="Çıkış Yap">
+                                <LogOut className="w-5 h-5" />
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-3">
+                            <Link to="/giris">
+                                <Button variant="ghost" className="text-white/80 hover:text-white hover:bg-white/5">Giriş Yap</Button>
+                            </Link>
+                            <Link to="/kayit">
+                                <Button className="bg-stardust text-[#0a0a0b] hover:bg-stardust/90 font-medium">Kayıt Ol</Button>
+                            </Link>
+                        </div>
+                    )}
+                </div>
             </div>
         </header>
     );
