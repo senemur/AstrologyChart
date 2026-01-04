@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
@@ -13,7 +13,7 @@
     --stardust: 45 93% 54%;
     --nebula: 215 28% 91%;
     --nebula-dark: 215 20% 65%;
-    
+
     --background: 222 47% 11%;
     --foreground: 215 28% 91%;
 
@@ -49,12 +49,12 @@
     --gradient-card: linear-gradient(180deg, hsl(276 91% 21% / 0.6) 0%, hsl(222 47% 11% / 0.8) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(45 93% 54%) 0%, hsl(35 90% 60%) 100%);
     --gradient-button: linear-gradient(135deg, hsl(45 93% 54%) 0%, hsl(40 95% 45%) 100%);
-    
+
     /* Shadows */
     --shadow-cosmic: 0 0 60px hsl(276 91% 21% / 0.5);
     --shadow-gold: 0 0 30px hsl(45 93% 54% / 0.3);
     --shadow-card: 0 8px 32px hsl(222 47% 5% / 0.5);
-    
+
     /* Glow Effects */
     --glow-gold: 0 0 20px hsl(45 93% 54% / 0.5), 0 0 40px hsl(45 93% 54% / 0.3);
     --glow-purple: 0 0 20px hsl(276 91% 21% / 0.5), 0 0 40px hsl(276 80% 35% / 0.3);
@@ -79,7 +79,12 @@
     min-height: 100vh;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Cinzel', serif;
   }
 }
@@ -123,38 +128,87 @@
 
 /* Star Animation */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(45 93% 54% / 0.3); }
-  50% { box-shadow: 0 0 40px hsl(45 93% 54% / 0.6); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsl(45 93% 54% / 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px hsl(45 93% 54% / 0.6);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes shooting-star {
-  0% { transform: rotate(45deg) translateX(0); opacity: 1; }
-  100% { transform: rotate(45deg) translateX(300px); opacity: 0; }
+  0% {
+    transform: rotate(45deg) translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(45deg) translateX(300px);
+    opacity: 0;
+  }
 }
 
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.1); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
 }
 
 .animate-shooting-star {
