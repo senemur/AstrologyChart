@@ -49,7 +49,15 @@ export interface AuthResponse {
     username: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5243/api";
+const getBaseUrl = () => {
+    let url = import.meta.env.VITE_API_BASE_URL || "http://localhost:5243/api";
+    if (!url.endsWith("/api")) {
+        url += "/api";
+    }
+    return url;
+};
+
+const API_BASE_URL = getBaseUrl();
 
 export const calculateChart = async (date: Date, latitude: number = 41.0082, longitude: number = 28.9784): Promise<ChartCalculationResult> => {
     const response = await fetch(`${API_BASE_URL}/Chart/calculate`, {
