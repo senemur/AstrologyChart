@@ -1,5 +1,12 @@
 # 🌌 Mistik Astroloji (Astrology World)
 
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/demo-online-green.svg?style=for-the-badge&logo=vercel)](https://astrology-chart-git-main-senemus-projects.vercel.app/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+</div>
+
 Mistik Astroloji, kullanıcıların doğum haritalarını hesaplamalarına, saklamalarına ve burç yorumlarını keşfetmelerine olanak tanıyan tam kapsamlı, full-stack bir astroloji platformudur.
 
 <!-- SCREENSHOTS -->
@@ -33,7 +40,7 @@ Mistik Astroloji, kullanıcıların doğum haritalarını hesaplamalarına, sakl
 
 | Haritalarım (My Charts) | Burçlar | Burç Detayı |
 | ----------------------- | ----------------------- |----------------------- |
-|![haritalarım](https://github.com/user-attachments/assets/961e0017-5710-46a0-96a6-667dd5108a15)| ![4burclar](https://github.com/user-attachments/assets/9c2441d7-e48e-4d8e-8405-85e6d3e921a1)|![5burcdetay](https://github.com/user-attachments/assets/22d312a4-e04c-4e45-b0d5-069a87636959)|
+| ![haritalarım](https://github.com/user-attachments/assets/961e0017-5710-46a0-96a6-667dd5108a15)| ![4burclar](https://github.com/user-attachments/assets/9c2441d7-e48e-4d8e-8405-85e6d3e921a1)|![5burcdetay](https://github.com/user-attachments/assets/22d312a4-e04c-4e45-b0d5-069a87636959)|
 
 
 ---
@@ -46,13 +53,13 @@ Proje, modern ve ölçeklenebilir bir mimari ile geliştirilmiştir:
 *   **Framework:** [React](https://reactjs.org/) (Vite ile)
 *   **Dil:** [TypeScript](https://www.typescriptlang.org/)
 *   **Stil:** [Tailwind CSS](https://tailwindcss.com/) & [Shadcn/UI](https://ui.shadcn.com/)
-*   **State Yönetimi:** React Context API & LocalStorage
-*   **İkonlar:** [Lucide React](https://lucide.dev/)
+*   **Hosting:** [Vercel](https://vercel.com/)
 
 ### Backend (Sunucu)
 *   **Platform:** [.NET 9.0](https://dotnet.microsoft.com/)
 *   **API:** ASP.NET Core Web API
-*   **Veritabanı:** SQL Server (Entity Framework Core ile)
+*   **Veritabanı:** PostgreSQL (Neon.tech - Cloud)
+*   **Hosting:** [Render](https://render.com/) (Docker Container)
 *   **Kimlik Doğrulama:** JWT (JSON Web Token)
 *   **Astroloji Motoru:** [SwissEphNet](https://github.com/SwissEph/SwissEphNet) (C# wrapper for Swiss Ephemeris)
 
