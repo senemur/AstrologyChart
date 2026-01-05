@@ -58,7 +58,7 @@ Proje, modern ve ölçeklenebilir bir mimari ile geliştirilmiştir:
 ### Backend (Sunucu)
 *   **Platform:** [.NET 9.0](https://dotnet.microsoft.com/)
 *   **API:** ASP.NET Core Web API
-*   **Veritabanı:** PostgreSQL (Neon.tech - Cloud)
+*   **Veritabanı:** PostgreSQL (Neon.tech - Render Cloud)
 *   **Hosting:** [Render](https://render.com/) (Docker Container)
 *   **Kimlik Doğrulama:** JWT (JSON Web Token)
 *   **Astroloji Motoru:** [SwissEphNet](https://github.com/SwissEph/SwissEphNet) (C# wrapper for Swiss Ephemeris)
