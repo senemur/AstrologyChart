@@ -50,7 +50,7 @@ export interface AuthResponse {
 }
 
 const getBaseUrl = () => {
-    let url = import.meta.env.VITE_API_BASE_URL || "http://localhost:5243/api";
+    let url = import.meta.env.VITE_API_BASE_URL || "https://astrologychart.onrender.com/api";
     if (!url.endsWith("/api")) {
         url += "/api";
     }
